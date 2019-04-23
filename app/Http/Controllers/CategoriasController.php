@@ -49,7 +49,7 @@ class CategoriasController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria)
+    public function show(Categorias $categoria)
     {
         //
     }
@@ -60,7 +60,7 @@ class CategoriasController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit(Categorias $categoria)
     {
         //
     }
@@ -72,7 +72,7 @@ class CategoriasController extends Controller
      * @param  \App\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, Categorias $categoria)
     {
         //
     }
@@ -80,11 +80,15 @@ class CategoriasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categoria  $categoria
+     * @param  \App\Categorias  $catego
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Categorias $categoria)
     {
-        //
+        //dd($categoria);
+       $categoria->delete();
+        //Categorias::destroy($categoria->id_catpreg);
+        return redirect("categorias");
+
     }
 }
