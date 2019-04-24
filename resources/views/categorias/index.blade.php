@@ -38,3 +38,28 @@
 
 
 @endsection
+
+<table class="table">
+    <thead>
+    <th>Id Categoria</th>
+    <th>Descripcion</th>
+    <th colspan="2"> Acciones</th>
+
+    </thead>
+    <tbdoy>
+        @foreach($categorias as $categoria)
+            <tr>
+                <td>{{$categoria->id_catpreg}}</td>
+                <td>{{$categoria->nom_cat}}</td>
+                <td><a href="" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
+                <td>
+                    <form action="{{route("categorias.destroy",$categoria->id_catpreg)}}" method="post">
+                        @csrf
+                        @method("DELETE")
+                        <button href="" class="btn btn-outline-danger"><i class="far fa-trash-alt"></i></button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </tbdoy>
+</table>
