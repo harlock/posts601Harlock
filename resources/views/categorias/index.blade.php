@@ -35,6 +35,6 @@
         </table>
     </div>
 </div>
-
-
 @endsection
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae quae deleniti sit, reiciendis! Voluptatem earum dolor quod adipisci, blanditiis veniam. Obcaecati quisquam enim atque ad iure facere facilis, labore voluptatem.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum fugit a, aliquid vero et culpa quibusdam ea dolorum ipsam inventore. Tempora ipsum voluptate suscipit rerum, architecto consectetur saepe blanditiis quibusdam?
