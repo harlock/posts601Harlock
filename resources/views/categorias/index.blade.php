@@ -35,6 +35,37 @@
         </table>
     </div>
 </div>
-@endsection
+
+
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae quae deleniti sit, reiciendis! Voluptatem earum dolor quod adipisci, blanditiis veniam. Obcaecati quisquam enim atque ad iure facere facilis, labore voluptatem.
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum fugit a, aliquid vero et culpa quibusdam ea dolorum ipsam inventore. Tempora ipsum voluptate suscipit rerum, architecto consectetur saepe blanditiis quibusdam?
+<table class="table">
+    <thead>
+    <th>Id Categoria</th>
+    <th>Descripcion</th>
+    <th colspan="2"> Acciones</th>
+
+    </thead>
+    <tbdoy>
+        @foreach($categorias as $categoria)
+            <tr>
+                <td>{{$categoria->id_catpreg}}</td>
+                <td>{{$categoria->nom_cat}}</td>
+                <td><a href="" class="btn btn-outline-primary"><i class="far fa-edit"></i></a></td>
+                <td>
+                    <form action="{{route("categorias.destroy",$categoria->id_catpreg)}}" method="post">
+                        @csrf
+                        @method("DELETE")
+                        <button href="" class="btn btn-outline-danger"><i class="far fa-trash-alt"></i></button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </tbdoy>
+</table>
+
+
+@endsection
+
+
+
