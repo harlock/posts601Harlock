@@ -15,8 +15,8 @@
             <li class="nav-item"><a href="#!" class="nav-link text-white">Home</a></li>
             <li class="nav-item"><a href="#!" class="nav-link text-white">Post</a></li>
             <li class="nav-item"><a href="{{url("categorias")}}" class="nav-link text-white">Categorias</a></li>
-            <li class="nav-item"><a href="#!" class="nav-link text-white">Nacionalidad</a></li>
-            <li class="nav-item"><a href="#!" class="nav-link text-white">Usuarios</a></li>
+            <li class="nav-item"><a href="{{url("nacionalidades")}}" class="nav-link text-white">Nacionalidad</a></li>
+            <li class="nav-item"><a href="{{url("personas")}}" class="nav-link text-white">Usuarios</a></li>
         </ul>
     </header>
     <section class="container">

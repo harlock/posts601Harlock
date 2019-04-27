@@ -3,4 +3,10 @@
 Route::get("/",function (){
    return view("layout.layout");
 });
-Route::resource('categorias','CategoriasController');
+
+Route::resources([
+    'categorias'=>'CategoriasController',
+    'nacionalidades'=>'NacionalidadesController',
+    'Empleados'=>'EmpleadosController',
+    'personas'=>'PersonasController'
+]);

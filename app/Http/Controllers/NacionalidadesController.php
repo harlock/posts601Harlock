@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Categorias;
+use App\Nacionalidades;
 use Illuminate\Http\Request;
 
-class CategoriasController extends Controller
+class NacionalidadesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        //
-        $categorias=Categorias::orderby('id_catpreg')->get();
-        return view("categorias.index",compact('categorias'));
+        $nacionalidades=Nacionalidades::orderby('id_nacionalidad')->get();
+        return view("Nacionalidades.index",compact('nacionalidades'));
     }
 
     /**
@@ -26,8 +25,8 @@ class CategoriasController extends Controller
      */
     public function create()
     {
-
-        return view("categorias.create");
+        //
+        return view('Nacionalidades.create');
     }
 
     /**
@@ -38,18 +37,20 @@ class CategoriasController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria=array('nom_cat'=>$request->desc_categoria);
-        Categorias::create($categoria);
-        return redirect("categorias");
+        //
+        $nacionalidades=array('nom_na'=>$request->desc_nacionalidad);
+        Nacionalidades::create($nacionalidades);
+        return redirect("nacionalidades");
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Categoria  $categoria
+     * @param  \App\Nacionalidades  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function show(Categorias $categoria)
+    public function show(Nacionalidades $nacionalidad)
     {
         //
     }
@@ -57,43 +58,34 @@ class CategoriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Categoria  $categoria
+     * @param  \App\Nacionalidades  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorias $categoria)
+    public function edit(Nacionalidades $nacionalidad)
     {
         //
-        return view("categorias.edit",compact('categoria'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Categoria  $categoria
+     * @param  \App\Nacionalidades  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorias $categoria)
+    public function update(Request $request, Nacionalidades $nacionalidad)
     {
         //
-       // dd($request->all());
-        $categoria->update($request->all());
-        return redirect("categorias");
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categorias  $catego
+     * @param  \App\Nacionalidades  $nacionalidad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorias $categoria)
+    public function destroy(Nacionalidades $nacionalidad)
     {
-        //dd($categoria);
-       $categoria->delete();
-        //Categorias::destroy($categoria->id_catpreg);
-        return redirect("categorias");
-
+        //
     }
 }

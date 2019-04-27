@@ -8,7 +8,7 @@ class Categorias extends Model
 {
     //
 
-    protected $table = 'categorias_preguntas';
+    protected $table = 'Categorias_preguntas';
     protected $primaryKey='id_catpreg';
     protected $fillable = ['nom_cat'];
 }
