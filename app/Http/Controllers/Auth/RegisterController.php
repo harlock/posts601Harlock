@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Nacionalidades;
+use App\Personas;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -39,7 +41,6 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -52,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+
         ]);
     }
 
@@ -63,10 +65,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $datos_persona=array(['nom_p' => $data['nom_p'],
+            'ap_p' => $data['ap_p'],
+            'am_p' => $data['am_p'],
+            'id_nacionalidad'=>1]);
+
+        $persona=Personas::create($datos_persona);
+        //dd($persona);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'id_persona'=>$persona->id_persona,
+            'tipo_usuario'=>0
         ]);
     }
 }
