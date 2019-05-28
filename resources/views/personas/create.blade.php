@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.layout_admin')
 @section('title','Añadir Personas')
 @section('content')
     <h1 class="bg-primary text-white text-center">Añadir Empleados</h1>

@@ -1,16 +1,31 @@
 <?php
 
 Route::get("/",function (){
-   return view("layout.layout");
+   return view("layout.layout_admin");
 });
 
-Route::resources([
-    'categorias'=>'CategoriasController',
-    'nacionalidades'=>'NacionalidadesController',
-    'Empleados'=>'EmpleadosController',
-    'personas'=>'PersonasController'
-]);
+Route::group(['middleware' => ['auth']], function () {
 
+    Route::group(['middleware' => ['userverify']],function(){
+
+        Route::resources([
+            'nacionalidades'=>'NacionalidadesController',
+            'Empleados'=>'EmpleadosController',
+            'personas'=>'PersonasController'
+        ]);
+    });
+
+
+    Route::resource('categorias','CategoriasController')->except(['index']);
+    Route::get('/home', 'HomeController@index')->name('home');
+
+});
+
+Route::get("categorias",'CategoriasController@index');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+

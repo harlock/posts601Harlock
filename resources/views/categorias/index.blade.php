@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.layout_admin')
 @section('title','Categorias')
 @section('content')
     <h1 class="bg-primary text-white text-center">Categorias</h1>

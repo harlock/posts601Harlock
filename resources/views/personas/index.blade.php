@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.layout_admin')
 @section('title','Nacionalidades')
 @section('content')
     <h1 class="bg-primary text-white text-center">Personas</h1>

@@ -1,5 +1,5 @@
 
-@extends("layout.layout")
+@extends("layout.layout_admin")
 @section('title','Agregar Nacionalidades')
 
 @section('content')

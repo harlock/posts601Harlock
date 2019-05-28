@@ -1,4 +1,6 @@
-@extends('layout.layout')
+
+@extends('layout.'.((Auth::user()->tipo_usuario==3)?'layout_admin':'layout_user'))
+
 
 @section('content')
 <div class="container">
