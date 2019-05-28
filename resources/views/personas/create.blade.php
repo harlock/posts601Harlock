@@ -11,7 +11,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="nom_p">Nombre empleado</label>
-                    <input type="text" class="form-control" name="nom_p" placeholder="Nombre">
+                    <input type="text" class="form-control" name="nom_p" placeholder="Nombre" required>
 
                     <label for="exampleInputPassword2">Apellido Paternos</label>
                     <input type="text" class="form-control" name="ap_p" placeholder="Apellido">

@@ -14,6 +14,16 @@
         </div>
     </div>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-4 offset-4">
             <form method="post" action="{{url('nacionalidades')}}">
@@ -21,6 +31,7 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Nombre nacionalidad</label>
                     <input type="text" class="form-control" name="desc_nacionalidad" placeholder="Nacionalidades">
+
                 </div>
                 <button type="submit" class="btn btn-primary"> Aceptar</button>
             </form>

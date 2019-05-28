@@ -38,6 +38,11 @@ class NacionalidadesController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            'desc_nacionalidad' => 'required',
+        ]);
+
         $nacionalidades=array('nom_na'=>$request->desc_nacionalidad);
         Nacionalidades::create($nacionalidades);
         return redirect("nacionalidades");
