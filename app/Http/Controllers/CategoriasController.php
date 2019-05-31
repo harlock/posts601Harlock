@@ -14,8 +14,8 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        //
-        $categorias=Categorias::orderby('id_catpreg')->get();
+        $filtro="%p%";
+        $categorias=Categorias::where("nom_cat","like",$filtro)->orderby('id_catpreg')->get();
         return view("categorias.index",compact('categorias'));
     }
 
@@ -38,7 +38,12 @@ class CategoriasController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria=array('nom_cat'=>$request->desc_categoria);
+        $request->validate([
+            'nom_cat' => 'required|unique:categorias_preguntas',
+        ]);
+
+
+        $categoria=array('nom_cat'=>$request->nom_cat);
         Categorias::create($categoria);
         return redirect("categorias");
     }

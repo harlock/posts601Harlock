@@ -16,7 +16,8 @@
 
         @if(Auth::user()->tipo_usuario==3||Auth::user()->tipo_usuario==2)
             <li class="nav-item"><a href="#!" class="nav-link text-white">Home</a></li>
-            <li class="nav-item"><a href="#!" class="nav-link text-white">Post</a></li>
+            <li class="nav-item"><a href="{{url("posts")}}" class="nav-link text-white">Post</a></li>
+            <li class="nav-item"><a href="{{url("preguntas")}}" class="nav-link text-white">preguntas</a></li>
 
         @endif
         @if(Auth::user()->tipo_usuario==3)

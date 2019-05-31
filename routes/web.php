@@ -19,7 +19,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('categorias','CategoriasController')->except(['index']);
     Route::get('/home', 'HomeController@index')->name('home');
 
+
+
 });
+
+Route::resource("posts", "PostController");
+Route::resource("preguntas", "PreguntaController");
 
 Route::get("categorias",'CategoriasController@index');
 Auth::routes();
