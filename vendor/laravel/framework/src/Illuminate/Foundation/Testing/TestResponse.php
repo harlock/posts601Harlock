@@ -119,6 +119,23 @@ class TestResponse
     }
 
     /**
+     * Assert that the response has an unauthorized status code.
+     *
+     * @return $this
+     */
+    public function assertUnauthorized()
+    {
+        $actual = $this->getStatusCode();
+
+        PHPUnit::assertTrue(
+            401 === $actual,
+            'Response status code ['.$actual.'] is not an unauthorized status code.'
+        );
+
+        return $this;
+    }
+
+    /**
      * Assert that the response has the given status code.
      *
      * @param  int  $status
@@ -139,7 +156,7 @@ class TestResponse
     /**
      * Assert whether the response is redirecting to a given URI.
      *
-     * @param  string  $uri
+     * @param  string|null  $uri
      * @return $this
      */
     public function assertRedirect($uri = null)
@@ -631,30 +648,42 @@ class TestResponse
     }
 
     /**
-     * Assert that the response has the given JSON validation errors for the given keys.
+     * Assert that the response has the given JSON validation errors.
      *
-     * @param  string|array  $keys
+     * @param  string|array  $errors
      * @return $this
      */
-    public function assertJsonValidationErrors($keys)
+    public function assertJsonValidationErrors($errors)
     {
-        $keys = Arr::wrap($keys);
+        $errors = Arr::wrap($errors);
 
-        PHPUnit::assertNotEmpty($keys, 'No keys were provided.');
+        PHPUnit::assertNotEmpty($errors, 'No validation errors were provided.');
 
-        $errors = $this->json()['errors'] ?? [];
+        $jsonErrors = $this->json()['errors'] ?? [];
 
-        $errorMessage = $errors
+        $errorMessage = $jsonErrors
                 ? 'Response has the following JSON validation errors:'.
-                        PHP_EOL.PHP_EOL.json_encode($errors, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).PHP_EOL
+                        PHP_EOL.PHP_EOL.json_encode($jsonErrors, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).PHP_EOL
                 : 'Response does not have JSON validation errors.';
 
-        foreach ($keys as $key) {
+        foreach ($errors as $key => $value) {
             PHPUnit::assertArrayHasKey(
-                $key,
-                $errors,
-                "Failed to find a validation error in the response for key: '{$key}'".PHP_EOL.PHP_EOL.$errorMessage
+                (is_int($key)) ? $value : $key,
+                $jsonErrors,
+                "Failed to find a validation error in the response for key: '{$value}'".PHP_EOL.PHP_EOL.$errorMessage
             );
+
+            if (! is_int($key)) {
+                foreach (Arr::wrap($jsonErrors[$key]) as $jsonErrorMessage) {
+                    if (Str::contains($jsonErrorMessage, $value)) {
+                        return $this;
+                    }
+                }
+
+                PHPUnit::fail(
+                    "Failed to find a validation error in the response for key and message: '$key' => '$value'".PHP_EOL.PHP_EOL.$errorMessage
+                );
+            }
         }
 
         return $this;
@@ -663,7 +692,7 @@ class TestResponse
     /**
      * Assert that the response has no JSON validation errors for the given keys.
      *
-     * @param  string|array  $keys
+     * @param  string|array|null  $keys
      * @return $this
      */
     public function assertJsonMissingValidationErrors($keys = null)
@@ -849,6 +878,8 @@ class TestResponse
                 $this->session()->has($key),
                 "Session is missing expected key [{$key}]."
             );
+        } elseif ($value instanceof Closure) {
+            PHPUnit::assertTrue($value($this->session()->get($key)));
         } else {
             PHPUnit::assertEquals($value, $this->session()->get($key));
         }
@@ -906,7 +937,7 @@ class TestResponse
      * Assert that the session is missing the given errors.
      *
      * @param  string|array  $keys
-     * @param  string  $format
+     * @param  string|null  $format
      * @param  string  $errorBag
      * @return $this
      */
@@ -1018,6 +1049,16 @@ class TestResponse
         }
 
         dd($content);
+    }
+
+    /**
+     * Dump the headers from the response.
+     *
+     * @return void
+     */
+    public function dumpHeaders()
+    {
+        dd($this->headers->all());
     }
 
     /**
